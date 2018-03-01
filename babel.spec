@@ -16,8 +16,8 @@
 %global bootstrap 0
 
 Name:           babel
-Version:        2.5.1
-Release:        2%{?dist}
+Version:        2.5.3
+Release:        1%{?dist}
 Summary:        Tools for internationalizing Python applications
 
 License:        BSD
@@ -32,12 +32,12 @@ BuildRequires:  python2-setuptools
 BuildRequires:  python2-pytz
 BuildRequires:  python2-pytest
 BuildRequires:  python2-freezegun
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  python%{python3_pkgversion}-setuptools
 %if !%{bootstrap}
-BuildRequires:  python3-pytz
-BuildRequires:  python3-pytest
-BuildRequires:  python3-freezegun
+BuildRequires:  python%{python3_pkgversion}-pytz
+BuildRequires:  python%{python3_pkgversion}-pytest
+BuildRequires:  python%{python3_pkgversion}-freezegun
 %endif
 
 # build the documentation
@@ -47,10 +47,10 @@ BuildRequires:  make
 %if %{bootstrap}
 BuildRequires:  python2-sphinx
 %else
-BuildRequires:  python3-sphinx
+BuildRequires:  python%{python3_pkgversion}-sphinx
 %endif
-Requires:       python3-babel
-Requires:       python3-setuptools
+Requires:       python%{python3_pkgversion}-babel
+Requires:       python%{python3_pkgversion}-setuptools
 %else
 BuildRequires:  python2-sphinx
 Requires:       python2-babel
@@ -84,15 +84,15 @@ Babel is composed of two major parts:
   providing access to various locale display names, localized number
   and date formatting, etc.
 
-%package -n python3-babel
+%package -n python%{python3_pkgversion}-babel
 Summary:        %sum
 
-Requires:       python3-setuptools
-Requires:       python3-pytz
+Requires:       python%{python3_pkgversion}-setuptools
+Requires:       python%{python3_pkgversion}-pytz
 
-%{?python_provide:%python_provide python3-babel}
+%{?python_provide:%python_provide python%{python3_pkgversion}-babel}
 
-%description -n python3-babel
+%description -n python%{python3_pkgversion}-babel
 Babel is composed of two major parts:
 
 * tools to build and work with gettext message catalogs
@@ -105,7 +105,7 @@ Babel is composed of two major parts:
 Summary:        Documentation for Babel
 Provides:       python-babel-doc = %{version}-%{release}
 Provides:       python2-babel-doc = %{version}-%{release}
-Provides:       python3-babel-doc = %{version}-%{release}
+Provides:       python%{python3_pkgversion}-babel-doc = %{version}-%{release}
 
 %description doc
 Documentation for Babel
@@ -156,7 +156,7 @@ export TZ=America/New_York
 %{python2_sitelib}/Babel-%{version}-py*.egg-info
 %{python2_sitelib}/babel
 
-%files -n python3-babel
+%files -n python%{python3_pkgversion}-babel
 %{python3_sitelib}/Babel-%{version}-py*.egg-info
 %{python3_sitelib}/babel
 
@@ -164,6 +164,9 @@ export TZ=America/New_York
 %doc built-docs/html/*
 
 %changelog
+* Thu Mar 01 2018 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 2.5.3-1
+- new version 2.5.3
+
 * Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2.5.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
